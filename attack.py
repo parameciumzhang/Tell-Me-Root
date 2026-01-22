@@ -51,7 +51,7 @@ def run_telnet_session(ip):
     print(f"连接成功: {ip}")
     print(f"{'='*30}")
     print("提示: 操作完毕后输入 'quit' 来退出。")
-    print("注意！！！若出现I don't hear you! 请输入ctrl+] 和 quit 来跳过这个ip")
+    print("注意！！！若出现I don't hear you! 请输入ctrl+] 和 exit 来跳过这个ip")
     try:
         subprocess.call(command_str, shell=True)
     except KeyboardInterrupt:
@@ -75,3 +75,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
